@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 Jan, 2020, 3:36:00 PM
+    Author     : LPS
+*/
+
+.banner-section {
+    position: absolute;
+    top: 250px;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    color: grey;
+    display: block;
+    height: 850px;
+    margin: 0 auto;
+    text-align: center;
+
+}
