@@ -9,7 +9,7 @@
 	<body>
 
 		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> ar - hit test<br/>(Chrome Android 81+)
+			<a href="https://apaarinfosystems.com" target="_blank" rel="noopener">Apaar Infosystems</a> WebXR - hit test<br/>(Chrome Android 81+)
 		</div>
 
 		<!-- Import maps polyfill -->
@@ -65,7 +65,7 @@
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
 
-				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1.5 );
 				light.position.set( 0.5, 1, 0.25 );
 				scene.add( light );
 
@@ -117,7 +117,7 @@
 							reticle.matrix.decompose( mesh.position, mesh.quaternion, mesh.scale );
 
 							mesh.scale.set(meshScale, meshScale, meshScale)
-							// mesh.rotation.y = 50;
+							mesh.rotation.y = 3;				
 							// mesh.position.y = 0.1;
 							// mesh.rotation.y += 0.1;
 
