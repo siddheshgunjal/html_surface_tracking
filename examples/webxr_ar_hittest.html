@@ -38,11 +38,19 @@
 
 			let reticle;
 
-			let hasMesh = false;
-			let meshScale = 1;
-
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
+
+			//added by Siddhesh Gunjal for Mesh Management
+			let hasMesh = false;
+			let meshScale = 5;
+
+			//Added by Siddhesh Gunjal for drag to rotate gesture
+			let targetRotation = 0;
+			let targetRotationOnPointerDown = 0;
+			let pointerX = 0;
+			let pointerXOnPointerDown = 0;
+			let windowHalfX = window.innerWidth / 2;
 
 			init();
 			animate();
@@ -132,10 +140,47 @@
 
 			function onWindowResize() {
 
+				//Added by Siddhesh Gunjal for drag to rotate gesture
+				windowHalfX = window.innerWidth / 2;
+
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//Added by Siddhesh Gunjal for drag to rotate gesture
+			function onPointerDown( event ) {
+
+				if ( event.isPrimary === false ) return;
+
+				pointerXOnPointerDown = event.clientX - windowHalfX;
+				targetRotationOnPointerDown = targetRotation;
+
+				document.addEventListener( 'pointermove', onPointerMove );
+				document.addEventListener( 'pointerup', onPointerUp );
+
+			}
+
+			//Added by Siddhesh Gunjal for drag to rotate gesture
+			function onPointerMove( event ) {
+
+				if ( event.isPrimary === false ) return;
+
+				pointerX = event.clientX - windowHalfX;
+
+				targetRotation = targetRotationOnPointerDown + ( pointerX - pointerXOnPointerDown ) * 0.02;
+
+			}
+
+			//Added by Siddhesh Gunjal for drag to rotate gesture
+			function onPointerUp() {
+
+				if ( event.isPrimary === false ) return;
+
+				document.removeEventListener( 'pointermove', onPointerMove );
+				document.removeEventListener( 'pointerup', onPointerUp );
 
 			}
 
@@ -204,6 +249,10 @@
 
 				}
 
+				//Added by Siddhesh Gunjal for drag to rotate gesture
+				scene.rotation.y += ( targetRotation - scene.rotation.y ) * 0.05;
+
+				//Scene Render
 				renderer.render( scene, camera );
 
 			}
