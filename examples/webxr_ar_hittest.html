@@ -42,8 +42,9 @@
 			let hitTestSourceRequested = false;
 
 			//added by Siddhesh Gunjal for Mesh Management
+			let mesh;
 			let hasMesh = false;
-			let meshScale = 5;
+			let meshScale = 0.5;
 
 			//Added by Siddhesh Gunjal for drag to rotate gesture
 			let targetRotation = 0;
@@ -107,15 +108,18 @@
 						// const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
 						// const mesh = new THREE.Mesh( geometry, material );
 
-						loader.load('BoomBox.glb', function(gltf){
+						loader.load('Soldier.glb', function(gltf){
 
 							// scene.add( gltf.scene );
 
-							const mesh = gltf.scene;
+							mesh = gltf.scene;
 
 							reticle.matrix.decompose( mesh.position, mesh.quaternion, mesh.scale );
 
 							mesh.scale.set(meshScale, meshScale, meshScale)
+							// mesh.rotation.y = 50;
+							// mesh.position.y = 0.1;
+							// mesh.rotation.y += 0.1;
 
 							scene.add(mesh);
 							hasMesh = true;
@@ -171,7 +175,7 @@
 				pointerX = event.clientX - windowHalfX;
 
 				targetRotation = targetRotationOnPointerDown + ( pointerX - pointerXOnPointerDown ) * 0.02;
-
+				console.log(targetRotation);
 			}
 
 			//Added by Siddhesh Gunjal for drag to rotate gesture
@@ -189,7 +193,6 @@
 			function animate() {
 
 				renderer.setAnimationLoop( render );
-
 			}
 
 			function render( timestamp, frame ) {
@@ -250,7 +253,7 @@
 				}
 
 				//Added by Siddhesh Gunjal for drag to rotate gesture
-				scene.rotation.y += ( targetRotation - scene.rotation.y ) * 0.05;
+				// scene.rotation.y += ( targetRotation - scene.rotation.y ) * 0.05;
 
 				//Scene Render
 				renderer.render( scene, camera );
