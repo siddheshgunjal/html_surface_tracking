@@ -124,7 +124,7 @@ class App{
 		// Load a GLTF resource
 		loader.load(
 			// resource URL
-			`spiderbot.glb`,
+			`scene.glb`,
 			// called when the resource is loaded
 			function ( gltf ) {
 				// const object = gltf.scene.children[5];
@@ -146,8 +146,8 @@ class App{
 				self.knight = new Player(options);
                 self.knight.object.visible = false;
 				
-				self.knight.action = 'armature|rummage';
-				const scale = 0.6;
+				self.knight.action = '';
+				const scale = 0.25;
 				self.knight.object.scale.set(scale, scale, scale); 
 				
                 self.loadingBar.visible = false;
@@ -245,6 +245,7 @@ class App{
                     self.knight.object.position.setFromMatrixPosition( self.reticle.matrix );
                     // self.knight.object.position.y = 0.1;
                     self.knight.object.visible = true;
+                    self.knight.action = '03_sphere_bot_open';
                     document.getElementById('hitt').click();
                     // this.btn.click();
                 }
@@ -254,14 +255,16 @@ class App{
         this.gestures.addEventListener( 'doubletap', (ev)=>{
             // console.log('doubletap');
 
+            // self.knight.action = '07_sphere_bot_jump';
+
             if(isIdle == true){
-                self.knight.action = 'armature|flight';
-                self.knight.object.position.y += 0.1;
+                self.knight.action = '07_sphere_bot_jump';
+                // self.knight.object.position.y += 0.1;
                 isIdle = false;
             }
             else{
-                self.knight.action = 'armature|rummage'
-                self.knight.object.position.y -= 0.1;
+                self.knight.action = '06_sphere_bot_run_attack';
+                // self.knight.object.position.y -= 0.1;
                 isIdle = true;
             }
         });

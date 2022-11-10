@@ -107,7 +107,7 @@ class Player{
             this.calculatedPath = [ pt.clone() ];
             //Calculate target direction
             this.setTargetDirection();
-            this.action = 'armature|walk';
+            this.action = '02_sphere_bot_run_cycle';
             return;
         }
         
@@ -122,7 +122,7 @@ class Player{
 		const self = this;
 		
 		if (this.calculatedPath && this.calculatedPath.length) {
-			this.action = 'armature|walk';
+			this.action = '02_sphere_bot_run_cycle';
 			
 			const pt = this.calculatedPath[0].clone();
 			this.setTargetDirection()
@@ -131,7 +131,7 @@ class Player{
 				this.showPathLines();
 			}
 		} else {
-			this.action = 'armature|rummage';
+			this.action = '';
 			
             if (self.pathfinder){
                 const closestPlayerNode = self.pathfinder.getClosestNode(player.position, this.ZONE, this.navMeshGroup);
@@ -159,7 +159,13 @@ class Player{
         
 		if (clip!==undefined){
 			const action = this.mixer.clipAction( clip );
-			action.loop = clip.loop;
+			if (name=='03_sphere_bot_open'){
+                action.loop = THREE.LoopOnce;
+                action.clampWhenFinished = true;
+            }
+            else {
+            	action.loop = clip.loop;
+            }
 			action.time = 0;
 			this.mixer.stopAllAction();
 			this.actionName = name.toLowerCase();
@@ -167,6 +173,11 @@ class Player{
 			action.fadeIn(0.5);	
 			action.play();
             this.curAction = action;
+
+            if (name=='06_sphere_bot_run_attack') {
+            	action.time = 0;
+            	action.paused = true;
+            }
 		}
 	}
 	
@@ -203,7 +214,7 @@ class Player{
                         this.newPath(this.app.randomWaypoint);
                     }else{
                         player.position.copy( targetPosition );
-                        this.action = 'armature|rummage';
+                        this.action = '03_sphere_bot_open';
                     }
                 }else{
                     const pt = this.calculatedPath[0].clone();
