@@ -147,7 +147,7 @@ class App{
                 self.knight.object.visible = false;
 				
 				self.knight.action = '';
-				const scale = 0.25;
+				const scale = 0.15;
 				self.knight.object.scale.set(scale, scale, scale); 
 				
                 self.loadingBar.visible = false;
