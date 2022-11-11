@@ -46,7 +46,8 @@ class App{
         
         this.initScene();
         this.setupXR();
-        // this.addButtonEvents();
+        
+        this.shadowMap();
 		
 		window.addEventListener('resize', this.resize.bind(this));
         
@@ -68,6 +69,33 @@ class App{
         }, undefined, (err)=>{
             console.error( 'An error occurred setting the environment');
         } );
+    }
+
+    shadowMap(){
+        const loader_ = new THREE.TextureLoader();
+        const shadowTexture = loader_.load('./assets/roundshadow.png');
+
+        const planeSize = 1;
+        const shadowGeo = new THREE.PlaneBufferGeometry(planeSize, planeSize);
+
+        // add the shadow to the base
+        // note: we make a new material for each sphere
+        // so we can set that sphere's material transparency
+        // separately.
+        const shadowMat = new THREE.MeshBasicMaterial({
+            map: shadowTexture,
+            transparent: true,    // so we can see the ground
+            depthWrite: false,    // so we don't have to sort
+        });
+
+        this.shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+        this.shadowMesh.position.y = 0.001;  // so we're above the ground slightly
+        this.shadowMesh.rotation.x = Math.PI * -.5;
+        const shadowSize = 0.45;
+        this.shadowMesh.scale.set(shadowSize, shadowSize, shadowSize);
+        this.shadowMesh.material.opacity = 0.6;
+        this.shadowMesh.visible = false;
+        this.scene.add(this.shadowMesh);
     }
 	
     resize(){ 
@@ -181,10 +209,7 @@ class App{
         
         this.loadKnight();
 
-        // this.addButtonEvents();
-
         this.isMove = true;
-        // this.isMove = this.addButtonEvents(this.isMove);
         // console.log(this.isMove);
 
         this.addButtonEvents();
@@ -243,8 +268,9 @@ class App{
                     document.getElementById('hitt').click();
                 }else{
                     self.knight.object.position.setFromMatrixPosition( self.reticle.matrix );
-                    // self.knight.object.position.y = 0.1;
+                    self.shadowMesh.position.setFromMatrixPosition( self.reticle.matrix );
                     self.knight.object.visible = true;
+                    self.shadowMesh.visible = true;
                     self.knight.action = '03_sphere_bot_open';
                     document.getElementById('hitt').click();
                     isIdle = true;
@@ -414,6 +440,8 @@ class App{
         }
 
         if (this.knight) this.knight.update(dt);
+
+        this.shadowMesh.position.setFromMatrixPosition( this.knight.object.matrix );
         
         if ( frame ) {
 
