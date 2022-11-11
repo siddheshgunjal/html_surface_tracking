@@ -93,7 +93,7 @@ class App{
         this.shadowMesh.rotation.x = Math.PI * -.5;
         const shadowSize = 0.45;
         this.shadowMesh.scale.set(shadowSize, shadowSize, shadowSize);
-        this.shadowMesh.material.opacity = 0.8;
+        this.shadowMesh.material.opacity = 1.0;
         this.shadowMesh.visible = false;
         this.scene.add(this.shadowMesh);
     }
