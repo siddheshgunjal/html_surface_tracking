@@ -174,7 +174,7 @@ class Player{
 			action.play();
             this.curAction = action;
 
-            if (name=='06_sphere_bot_run_attack') {
+            if (name=='04_sphere_bot_attack') {
             	action.time = 0;
             	action.paused = true;
             }

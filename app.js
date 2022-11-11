@@ -28,6 +28,7 @@ class App{
         
         const light = new THREE.DirectionalLight();
         light.position.set( 0.2, 1, 1);
+        light.castShadow = true;
         this.scene.add(light);
 			
 		this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true } );
@@ -133,7 +134,7 @@ class App{
 				
 				const options = {
 					object: object,
-					speed: 0.5,
+					speed: 0.4,
 					assetsPath: self.assetsPath,
 					loader: loader,
                     animations: gltf.animations,
@@ -147,7 +148,7 @@ class App{
                 self.knight.object.visible = false;
 				
 				self.knight.action = '';
-				const scale = 0.15;
+				const scale = 0.1;
 				self.knight.object.scale.set(scale, scale, scale); 
 				
                 self.loadingBar.visible = false;
@@ -170,7 +171,7 @@ class App{
     
     initScene(){
         this.reticle = new THREE.Mesh(
-            new THREE.RingBufferGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
+            new THREE.RingBufferGeometry( 0.07, 0.12, 32 ).rotateX( - Math.PI / 2 ),
             new THREE.MeshBasicMaterial()
         );
         
@@ -230,7 +231,7 @@ class App{
         this.hitTestSourceRequested = false;
         this.hitTestSource = null;
 
-        let isIdle = true;
+        let isIdle, isJump, isAttack;
         
         function onSelect() {
             if (self.knight===undefined) return;
@@ -240,32 +241,50 @@ class App{
                     self.workingVec3.setFromMatrixPosition( self.reticle.matrix );
                     self.knight.newPath(self.workingVec3);
                     document.getElementById('hitt').click();
-                    isIdle = true;
                 }else{
                     self.knight.object.position.setFromMatrixPosition( self.reticle.matrix );
                     // self.knight.object.position.y = 0.1;
                     self.knight.object.visible = true;
                     self.knight.action = '03_sphere_bot_open';
                     document.getElementById('hitt').click();
-                    // this.btn.click();
+                    isIdle = true;
+                    isJump = false;
+                    isAttack = false;
                 }
             }
         }
 
+        this.gestures.addEventListener( 'tap', (ev)=>{
+            if (isIdle == false) {
+                self.knight.action = '04_sphere_bot_attack'
+                isIdle = true;
+                isJump = false;
+                isAttack = false;
+            }
+        });
+
         this.gestures.addEventListener( 'doubletap', (ev)=>{
             // console.log('doubletap');
-
             // self.knight.action = '07_sphere_bot_jump';
 
-            if(isIdle == true){
+            if(isAttack == false){
+                self.knight.action = '06_sphere_bot_run_attack';
+                // self.knight.object.position.y += 0.1;
+                isJump = false;
+                isIdle = false;
+                isAttack = true;
+            }
+        });
+
+        this.gestures.addEventListener( 'swipe', (ev)=>{
+            // console.log( ev.direction );
+
+            if (ev.direction == 'UP' && isJump == false) {
                 self.knight.action = '07_sphere_bot_jump';
                 // self.knight.object.position.y += 0.1;
+                isJump = true;
                 isIdle = false;
-            }
-            else{
-                self.knight.action = '06_sphere_bot_run_attack';
-                // self.knight.object.position.y -= 0.1;
-                isIdle = true;
+                isAttack = false;
             }
         });
 
@@ -281,7 +300,7 @@ class App{
         });
 
         this.gestures.addEventListener( 'pinch', (ev)=>{
-            if (self.isMove === true) {return}
+            // if (self.isMove === true) {return}
             if (ev.initialise !== undefined){
                 self.startScale = self.knight.object.scale.clone();
             }else{
