@@ -171,7 +171,7 @@ class App{
     
     initScene(){
         this.reticle = new THREE.Mesh(
-            new THREE.RingBufferGeometry( 0.07, 0.12, 32 ).rotateX( - Math.PI / 2 ),
+            new THREE.RingBufferGeometry( 0.07, 0.09, 32 ).rotateX( - Math.PI / 2 ),
             new THREE.MeshBasicMaterial()
         );
         
