@@ -41,7 +41,8 @@ class ARButton{
 			} else {
 
 				message.href = 'https://immersiveweb.dev/';
-				message.innerHTML = 'WEBXR NOT AVAILABLE';
+				// message.innerHTML = 'WEBXR NOT AVAILABLE';
+                message.innerHTML = 'Please open in CHROME on Android';
 
 			}
 
@@ -170,7 +171,8 @@ class ARButton{
         button.style.border = '';
         button.style.opacity = '1';
         button.style.fontSize = '13px';
-        button.textContent = 'AR NOT SUPPORTED';
+        // button.textContent = 'AR NOT SUPPORTED';
+        button.textContent = 'Please open in CHROME on Android';
 
     }
 

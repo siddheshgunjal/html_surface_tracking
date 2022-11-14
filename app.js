@@ -39,10 +39,6 @@ class App{
         this.setEnvironment();
         
         this.workingVec3 = new THREE.Vector3();
-
-        // this.isMove = true;
-
-        // this.isMove = this.addButtonEvents(this.isMove);
         
         this.initScene();
         this.setupXR();
@@ -91,7 +87,7 @@ class App{
         this.shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
         this.shadowMesh.position.y = 0.001;  // so we're above the ground slightly
         this.shadowMesh.rotation.x = Math.PI * -.5;
-        const shadowSize = 0.45;
+        const shadowSize = 0.3;
         this.shadowMesh.scale.set(shadowSize, shadowSize, shadowSize);
         this.shadowMesh.material.opacity = 1.0;
         this.shadowMesh.visible = false;
@@ -103,48 +99,6 @@ class App{
     	this.camera.updateProjectionMatrix();
     	this.renderer.setSize( window.innerWidth, window.innerHeight );  
     }
-
-    // set speed(name){
-    //     if (this.actionName == name) return;
-        
-    //     const clip = this.animations[name];
-        
-    //     if (clip!==undefined){
-    //         const action = this.mixer.clipAction( clip );
-            
-    //         if (name=='Die'){
-    //             action.loop = THREE.LoopOnce;
-    //             action.clampWhenFinished = true;
-    //         }
-            
-    //         this.actionName = name;
-    //         if (this.curAction) this.curAction.crossFadeTo(action, 0.5);
-            
-    //         action.enabled = true;
-    //         action.play();
-            
-    //         this.curAction = action;
-    //     }
-    // }
-
-    // addButtonEvents(){
-
-    //     function onClick(){
-    //         const self = this;
-
-    //         function onClick(){
-    //             self.speed = this.innerHTML;    
-    //         }
-    //     }
-
-    //     const btn = document.getElementById('dir');
-    //     btn.addEventListener('click', onClick);
-        
-    //     // for(let i=1; i<=4; i++){
-    //     //     const btn = document.getElementById(`btn${i}`);
-    //     //     btn.addEventListener( 'click', onClick );
-    //     // }    
-    // }
     
     loadKnight(){
 	    const loader = new GLTFLoader().setPath(this.assetsPath);
@@ -210,7 +164,6 @@ class App{
         this.loadKnight();
 
         this.isMove = true;
-        // console.log(this.isMove);
 
         this.addButtonEvents();
     }
@@ -219,29 +172,22 @@ class App{
         const self = this;
         
         function onClick(){
-            // console.log(self.isMove);
-            // self.isMove = !self.isMove;
-            // btn.style.display = "block";
 
             if (self.isMove === true) {
                 self.isMove = false;
-                btn.style.display = 'block';
+                self.btn.style.display = 'block';
             }
 
             else {
                 self.isMove = true;
-                btn.style.display = 'none';
+                self.btn.style.display = 'none';
             }
             // console.log(self.isMove);
         }
 
-        const btn = document.getElementById('hitt');
-        btn.addEventListener('click', onClick);
-        
-        // for(let i=1; i<=4; i++){
-        //     const btn = document.getElementById(`btn${i}`);
-        //     btn.addEventListener( 'click', onClick );
-        // }    
+        self.btn = document.getElementById('hitt');
+        self.btn.addEventListener('click', onClick);
+          
     }
     
     setupXR(){
@@ -282,10 +228,12 @@ class App{
 
         this.gestures.addEventListener( 'tap', (ev)=>{
             if (isIdle == false) {
-                self.knight.action = '04_sphere_bot_attack'
+                // self.knight.mixer.stopAllAction();
+                self.knight.action = '06_sphere_bot_run_attack';
                 isIdle = true;
                 isJump = false;
                 isAttack = false;
+                this.btn.disabled = false;
             }
         });
 
@@ -294,23 +242,23 @@ class App{
             // self.knight.action = '07_sphere_bot_jump';
 
             if(isAttack == false){
-                self.knight.action = '06_sphere_bot_run_attack';
-                // self.knight.object.position.y += 0.1;
+                self.knight.action = '04_sphere_bot_attack';
                 isJump = false;
                 isIdle = false;
                 isAttack = true;
+                this.btn.disabled = true;
             }
         });
 
         this.gestures.addEventListener( 'swipe', (ev)=>{
-            // console.log( ev.direction );
+            console.log( ev.direction );
 
             if (ev.direction == 'UP' && isJump == false) {
                 self.knight.action = '07_sphere_bot_jump';
-                // self.knight.object.position.y += 0.1;
                 isJump = true;
                 isIdle = false;
                 isAttack = false;
+                this.btn.disabled = true;
             }
         });
 
@@ -326,7 +274,8 @@ class App{
         });
 
         this.gestures.addEventListener( 'pinch', (ev)=>{
-            // if (self.isMove === true) {return}
+            if (self.isMove === true) {return}
+
             if (ev.initialise !== undefined){
                 self.startScale = self.knight.object.scale.clone();
             }else{
@@ -371,55 +320,17 @@ class App{
     getHitTestResults( frame ){
 
         const hitTestResults = frame.getHitTestResults( this.hitTestSource );
+
         // console.log(this.isMove);
 
-        // let isMove = false;
-
-        // dirButton.onclick = function switchMode(){
-        //     if (isMove == false) {
-        //         isMove = true;
-        //         dirButton.textContent = 'Stop Directions';
-        //     }
-        //     else {
-        //         isMove = false;
-        //         console.log("isMove change")
-        //         dirButton.textContent = 'Give Directions';
-        //     }
-        // }
-
-        if ( hitTestResults.length && this.isMove == true ) {
+        if ( hitTestResults.length && this.isMove === true ) {
             
             const referenceSpace = this.renderer.xr.getReferenceSpace();
             const hit = hitTestResults[ 0 ];
             const pose = hit.getPose( referenceSpace );
 
-            // console.log(this.isMove);
-
             this.reticle.visible = true;
             this.reticle.matrix.fromArray( pose.transform.matrix );
-
-            // if (this.knight.object.visible == false) {
-            //     const referenceSpace = this.renderer.xr.getReferenceSpace();
-            //     const hit = hitTestResults[ 0 ];
-            //     const pose = hit.getPose( referenceSpace );
-
-            //     this.reticle.visible = true;
-            //     this.reticle.matrix.fromArray( pose.transform.matrix );
-            // }
-
-            // if (this.knight.object.visible == true) {
-            //     if (isMove == true) {
-            //         const referenceSpace = this.renderer.xr.getReferenceSpace();
-            //         const hit = hitTestResults[ 0 ];
-            //         const pose = hit.getPose( referenceSpace );
-
-            //         this.reticle.visible = true;
-            //         this.reticle.matrix.fromArray( pose.transform.matrix );
-            //     }
-            //     else {
-            //         this.reticle.visible = false;
-            //     }
-            // }
 
         }
         else {
@@ -442,25 +353,18 @@ class App{
         if (this.knight) this.knight.update(dt);
 
         this.shadowMesh.position.setFromMatrixPosition( this.knight.object.matrix );
-        
+        // this.shadowMesh.material.opacity = Math.abs(1.5/this.knight.object.position.y);
+        // console.log(Math.abs(this.knight.object.));
+
         if ( frame ) {
 
-            // console.log(this.isMove);
-            // this.isMove = true;
-            // this.isMove = this.addButtonEvents(this.isMove);
             if ( this.hitTestSourceRequested === false ) this.requestHitTestSource( )
-
-            // if ( this.isMove == true ) this.requestHitTestSource( );
 
             if ( this.hitTestSource ) this.getHitTestResults( frame );
 
         }
 
         this.renderer.render( this.scene, this.camera );
-        
-        /*if (this.knight.calculatedPath && this.knight.calculatedPath.length>0){
-            console.log( `path:${this.knight.calculatedPath[0].x.toFixed(2)}, ${this.knight.calculatedPath[0].y.toFixed(2)}, ${this.knight.calculatedPath[0].z.toFixed(2)} position: ${this.knight.object.position.x.toFixed(2)}, ${this.knight.object.position.y.toFixed(2)}, ${this.knight.object.position.z.toFixed(2)}`);
-        }*/
     }
 }
 

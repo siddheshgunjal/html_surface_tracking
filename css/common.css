@@ -76,3 +76,19 @@ button {
     margin: 0 auto;
     display: none;
 }
+
+.vert_hor_center {
+    position: absolute;
+    display: flex;
+    height: auto;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+    margin: 250px auto 50px;
+}
+
+#logo {
+    position: relative;
+    width: 65%;
+    text-align: center;
+    margin-left: 18%;
