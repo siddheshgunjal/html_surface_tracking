@@ -254,7 +254,7 @@ class App{
         });
 
         this.gestures.addEventListener( 'swipe', (ev)=>{
-            console.log( ev.direction );
+            // console.log( ev.direction );
 
             if (ev.direction == 'UP' && isJump == false) {
                 self.knight.action = '07_sphere_bot_jump';

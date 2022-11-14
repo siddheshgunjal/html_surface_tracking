@@ -1,4 +1,5 @@
-import * as THREE from './three/three.module.js';
+// import * as THREE from './three/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
 
 class ControllerGestures extends THREE.EventDispatcher{
     constructor( renderer ){
@@ -48,7 +49,7 @@ class ControllerGestures extends THREE.EventDispatcher{
             
             self.touchCount++;
             
-            console.log( `onSelectStart touchCount: ${ self.touchCount }` );
+            // console.log( `onSelectStart touchCount: ${ self.touchCount }` );
         }
         
         function onSelectEnd( ){
@@ -90,7 +91,7 @@ class ControllerGestures extends THREE.EventDispatcher{
             result = this.controller1.userData.selectPressed && this.controller2.userData.selectPressed;
         }
         const self = this;
-        console.log( `ControllerGestures multiTouch: ${result} touchCount:${self.touchCount}`);
+        // console.log( `ControllerGestures multiTouch: ${result} touchCount:${self.touchCount}`);
         return result;
     }
     

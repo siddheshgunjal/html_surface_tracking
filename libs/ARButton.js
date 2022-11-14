@@ -64,6 +64,7 @@ class ARButton{
 
         let currentSession = null;
         const self = this;
+        const logo = document.getElementById('logo');
         
         this.stylizeElement( button, true, 30, true );
         
@@ -77,6 +78,7 @@ class ARButton{
             
             button.textContent = 'STOP AR';
             button.style.display = 'none';
+            logo.style.display = 'none';
 
             currentSession = session;
             
