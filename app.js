@@ -7,7 +7,7 @@ import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/examples/
 import { ARButton } from './libs/ARButton.js';
 import { LoadingBar } from './libs/LoadingBar.js';
 import { Player } from './libs/Player.js';
-import { ControllerGestures } from './libs/three125/ControllerGestures.js'; 
+import { ControllerGestures } from './libs/ControllerGestures.js'; 
 
 class App{
 	constructor(){

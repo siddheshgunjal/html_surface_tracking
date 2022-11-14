@@ -85,6 +85,7 @@ button {
     width: 100%;
     vertical-align: middle;
     margin: 250px auto 50px;
+    z-index: -5;
 }
 
 #logo {
