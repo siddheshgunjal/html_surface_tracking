@@ -1,6 +1,9 @@
-import * as THREE from './libs/three125/three.module.js';
-import { GLTFLoader } from './libs/three125/GLTFLoader.js';
-import { RGBELoader } from './libs/three125/RGBELoader.js';
+// import * as THREE from './libs/three125/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
+// import { GLTFLoader } from './libs/three125/GLTFLoader.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/examples/jsm/loaders/GLTFLoader.js';
+// import { RGBELoader } from './libs/three125/RGBELoader.js';
+import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from './libs/ARButton.js';
 import { LoadingBar } from './libs/LoadingBar.js';
 import { Player } from './libs/Player.js';
