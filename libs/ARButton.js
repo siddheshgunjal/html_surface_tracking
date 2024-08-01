@@ -1,9 +1,3 @@
-/**
- * @author mrdoob / http://mrdoob.com
- * @author Mugen87 / https://github.com/Mugen87
- * @author NikLever / http://niklever.com
- */
-
 class ARButton{
 
 	constructor( renderer, options ) {
@@ -42,7 +36,7 @@ class ARButton{
 
 				message.href = 'https://immersiveweb.dev/';
 				// message.innerHTML = 'WEBXR NOT AVAILABLE';
-                message.innerHTML = 'Please open in CHROME on Android';
+                message.innerHTML = 'Please open in CHROME or BRAVE on Android';
 
 			}
 
@@ -173,8 +167,9 @@ class ARButton{
         button.style.border = '';
         button.style.opacity = '1';
         button.style.fontSize = '13px';
-        // button.textContent = 'AR NOT SUPPORTED';
-        button.textContent = 'Please open in CHROME on Android';
+        button.style.font = 'Arial';
+        button.href = 'https://immersiveweb.dev/';
+        button.textContent = 'Please open in CHROME or BRAVE on Android';
 
     }
 
@@ -187,7 +182,7 @@ class ARButton{
         element.style.borderRadius = '15px';
         element.style.background = (active) ? 'rgba(20,150,80,1)' : 'rgba(180,20,20,1)';
         element.style.color = '#fff';
-        element.style.font = `normal ${fontSize}px sans-serif`;
+        element.style.font = `normal ${fontSize}px Arial`;
         element.style.textAlign = 'center';
         element.style.opacity = '1.0';
         element.style.outline = 'none';
