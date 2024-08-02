@@ -81,11 +81,25 @@ button {
 
 .vert_hor_center {
     position: absolute;
-    height: auto;
+    height: 100%;
     text-align: center;
     width: 100%;
     vertical-align: middle;
-    margin: 350px auto 50px;
+}
+
+.vert_hor_center p {
+  position: relative;
+  top: 35%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.vert_hor_center a {
+  position: relative;
+  top: 35%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 /*.icon-set {
