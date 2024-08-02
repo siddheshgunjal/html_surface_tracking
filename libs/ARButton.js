@@ -58,7 +58,7 @@ class ARButton{
 
         let currentSession = null;
         const self = this;
-        const logo = document.getElementsByClassName('vert_hor_center');
+        const logo = document.getElementById('intro');
         
         this.stylizeElement( button, true, 30, true );
         
