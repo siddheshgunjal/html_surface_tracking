@@ -166,7 +166,6 @@ class ARButton{
         button.style.border = '';
         button.style.opacity = '1';
         button.style.fontSize = '13px';
-        button.style.font = 'Arial';
         button.href = 'https://immersiveweb.dev/#supporttable';
         button.textContent = 'Please open in CHROME or BRAVE on Android';
 

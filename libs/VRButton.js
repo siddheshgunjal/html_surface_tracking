@@ -64,6 +64,7 @@ class VRButton{
 
         let currentSession = null;
         const self = this;
+        const logo = document.getElementsByClassName('vert_hor_center');
         
         this.stylizeElement( button, true, 30, true );
         
@@ -75,6 +76,7 @@ class VRButton{
             self.stylizeElement( button, false, 12, true );
             
             button.textContent = 'EXIT VR';
+            logo.style.display = 'none';
 
             currentSession = session;
             
@@ -156,7 +158,7 @@ class VRButton{
     }
 
     showWebXRNotFound( button ) {
-        this.stylizeElement( button, false );
+        this.stylizeElement( button, true );
         
         this.disableButton(button);
 
@@ -167,6 +169,7 @@ class VRButton{
         button.style.border = '';
         button.style.opacity = '1';
         button.style.fontSize = '13px';
+        button.href = 'https://immersiveweb.dev/#supporttable';
         button.textContent = 'VR NOT SUPPORTED';
         
         
