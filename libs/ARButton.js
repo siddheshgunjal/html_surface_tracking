@@ -58,7 +58,7 @@ class ARButton{
 
         let currentSession = null;
         const self = this;
-        const logo = document.getElementById('logo');
+        const logo = document.getElementsByClassName('vert_hor_center');
         
         this.stylizeElement( button, true, 30, true );
         
@@ -71,7 +71,6 @@ class ARButton{
             self.stylizeElement( button, false, 12, true );
             
             button.textContent = 'STOP AR';
-            button.style.display = 'none';
             logo.style.display = 'none';
 
             currentSession = session;
@@ -156,7 +155,7 @@ class ARButton{
     }
 
     showARNotSupported( button ) {
-        this.stylizeElement( button, false );
+        this.stylizeElement( button, true );
         
         this.disableButton(button);
 
@@ -168,7 +167,7 @@ class ARButton{
         button.style.opacity = '1';
         button.style.fontSize = '13px';
         button.style.font = 'Arial';
-        button.href = 'https://immersiveweb.dev/';
+        button.href = 'https://immersiveweb.dev/#supporttable';
         button.textContent = 'Please open in CHROME or BRAVE on Android';
 
     }
