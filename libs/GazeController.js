@@ -1,4 +1,4 @@
-import { Clock, Vector3, Matrix4 } from "./three/three.module.js";
+import { Clock, Vector3, Matrix4 } from "https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js";
 import { RingProgressMesh } from './RingProgressMesh.js';
 
 class GazeController{

@@ -1,4 +1,4 @@
-import * as THREE from './three125/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
 
 class Player{
 	constructor(options){
@@ -159,9 +159,13 @@ class Player{
         
 		if (clip!==undefined){
 			const action = this.mixer.clipAction( clip );
-			if (name=='03_sphere_bot_open'){
+			if (name == '03_sphere_bot_open'){
                 action.loop = THREE.LoopOnce;
                 action.clampWhenFinished = true;
+            }
+            else if (name == '06_sphere_bot_run_attack') {
+            	action.time = 0;
+            	action.paused = true;
             }
             else {
             	action.loop = clip.loop;
@@ -173,11 +177,6 @@ class Player{
 			action.fadeIn(0.5);	
 			action.play();
             this.curAction = action;
-
-            if (name=='06_sphere_bot_run_attack') {
-            	action.time = 0;
-            	action.paused = true;
-            }
 		}
 	}
 	
@@ -214,7 +213,7 @@ class Player{
                         this.newPath(this.app.randomWaypoint);
                     }else{
                         player.position.copy( targetPosition );
-                        this.action = '03_sphere_bot_open';
+                        this.action = '06_sphere_bot_run_attack';
                     }
                 }else{
                     const pt = this.calculatedPath[0].clone();

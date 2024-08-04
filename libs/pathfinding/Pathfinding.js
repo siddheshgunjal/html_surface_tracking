@@ -2,7 +2,7 @@ import {
 	Vector3,
 	Plane,
 	Triangle,
-} from '../three/three.module.js';
+} from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
 
 import { Utils } from './Utils.js';
 import { AStar } from './AStar.js';

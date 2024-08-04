@@ -1,5 +1,5 @@
 //Based on https://github.com/jeromeetienne/threex.volumetricspotlight
-import { Color, Vector3, ShaderMaterial } from './three/three.module.js';
+import { Color, Vector3, ShaderMaterial } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
 
 class SpotLightVolumetricMaterial extends ShaderMaterial{
 	constructor( color = new Color(0xFFFFFF), position = new Vector3() , attenuation = 5.0, anglePower = 1.2){

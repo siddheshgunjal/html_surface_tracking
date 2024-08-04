@@ -1,7 +1,3 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- */
-
 var Stats = function () {
 
 	var mode = 0;
@@ -35,8 +31,6 @@ var Stats = function () {
 		mode = id;
 
 	}
-
-	//
 
 	var beginTime = ( performance || Date ).now(), prevTime = beginTime, frames = 0;
 

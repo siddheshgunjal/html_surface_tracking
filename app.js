@@ -1,8 +1,5 @@
-// import * as THREE from './libs/three125/three.module.js';
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
-// import { GLTFLoader } from './libs/three125/GLTFLoader.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/examples/jsm/loaders/GLTFLoader.js';
-// import { RGBELoader } from './libs/three125/RGBELoader.js';
 import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/examples/jsm/loaders/RGBELoader.js';
 import { ARButton } from './libs/ARButton.js';
 import { LoadingBar } from './libs/LoadingBar.js';
@@ -220,7 +217,7 @@ class App{
                     self.shadowMesh.position.setFromMatrixPosition( self.reticle.matrix );
                     self.knight.object.visible = true;
                     self.shadowMesh.visible = true;
-                    self.knight.action = '03_sphere_bot_open';
+                    self.knight.action = '06_sphere_bot_run_attack';
                     document.getElementById('hitt').click();
                     isIdle = true;
                     isJump = false;
@@ -229,21 +226,17 @@ class App{
             }
         }
 
-        this.gestures.addEventListener( 'tap', (ev)=>{
-            if (isIdle == false) {
-                // self.knight.mixer.stopAllAction();
-                self.knight.action = '06_sphere_bot_run_attack';
-                isIdle = true;
+        this.gestures.addEventListener( 'doubletap', (ev)=>{
+            if (isIdle == true) {
+                self.knight.action = '03_sphere_bot_open';
+                isIdle = false;
                 isJump = false;
                 isAttack = false;
-                this.btn.disabled = false;
+                this.btn.disabled = true;
             }
         });
 
-        this.gestures.addEventListener( 'doubletap', (ev)=>{
-            // console.log('doubletap');
-            // self.knight.action = '07_sphere_bot_jump';
-
+        this.gestures.addEventListener( 'tripletap', (ev)=>{
             if(isAttack == false){
                 self.knight.action = '04_sphere_bot_attack';
                 isJump = false;
@@ -254,8 +247,6 @@ class App{
         });
 
         this.gestures.addEventListener( 'swipe', (ev)=>{
-            // console.log( ev.direction );
-
             if (ev.direction == 'UP' && isJump == false) {
                 self.knight.action = '07_sphere_bot_jump';
                 isJump = true;
@@ -263,10 +254,16 @@ class App{
                 isAttack = false;
                 this.btn.disabled = true;
             }
+            if (ev.direction == 'DOWN' && isIdle == false) {
+                self.knight.action = '06_sphere_bot_run_attack';
+                isIdle = true;
+                isJump = false;
+                isAttack = false;
+                this.btn.disabled = false;
+            }
         });
 
         this.gestures.addEventListener( 'pan', (ev)=>{
-            //console.log( ev );
             if (self.isMove === true) {return}
 
             if (ev.initialise !== undefined){

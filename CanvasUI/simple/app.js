@@ -1,5 +1,5 @@
-import * as THREE from '../../libs/three/three.module.js';
-import { BoxLineGeometry } from '../../libs/three/jsm/BoxLineGeometry.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
+import { BoxLineGeometry } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/examples/jsm/geometries/BoxLineGeometry.js';
 import { CanvasUI } from '../../libs/CanvasUI.js'
 import { VRButton } from '../../libs/VRButton.js';
 

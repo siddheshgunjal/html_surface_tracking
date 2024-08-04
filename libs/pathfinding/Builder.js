@@ -1,4 +1,4 @@
-import { Vector3 } from '../three/three.module.js';
+import { Vector3 } from 'https://cdn.jsdelivr.net/npm/three@0.125.2/build/three.module.js';
 
 import { Utils } from './Utils.js';
 

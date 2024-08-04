@@ -1,7 +1,3 @@
-/**
- * @author mvilledieu / http://github.com/mvilledieu
- */
-
 if ( /(Helio)/g.test( navigator.userAgent ) && 'xr' in navigator ) {
 
 	console.log( "Helio WebXR Polyfill (Lumin 0.98.0)" );
