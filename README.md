@@ -22,7 +22,7 @@ _WebXR is not a rendering technology and does not provide features for managing 
 
 ## How to run this Project on your local machine
 
-In order to run the WebXR Device API we need `https`. To the test/debug WebXR applications, the simplest method is to server your local server over https over [ngrok](https://ngrok.com/). Follow below steps to run this project:
+In order to run the WebXR Device API we need `https`. To the test/debug WebXR applications, the simplest method is to host your local server over https over [ngrok](https://ngrok.com/). Follow below steps to run this project:
 
 Clone this repo
 
@@ -60,13 +60,11 @@ Now visit the `https` url from your hand-held device
 If you get stuck, we’re here to help. The following are the best ways to get assistance working through your issue:
 
 * Use our [Github Issue Tracker][gh-issues] for reporting bugs or requesting features.
-Contribution are the best way to keep `slackker` amazing :muscle:
-* If you want to contribute please refer [Contributor's Guide][gh-contrib] for how to contribute in a helpful and collaborative way :innocent:
+Contribution are the best way to keep thos project amazing :muscle:
 
 # Maintainer :sunglasses:
 [<img alt="Static Badge" src="https://img.shields.io/badge/my_website-click_to_visit-informational?style=for-the-badge&logo=googlechrome&logoColor=white&color=black">][portfolio]
 
 <!-- Markdown link -->
 [gh-issues]: https://github.com/siddheshgunjal/slackker/issues
-[gh-contrib]: https://github.com/siddheshgunjal/slackker/blob/main/CONTRIBUTING.md
 [portfolio]: https://siddheshgunjal.github.io
