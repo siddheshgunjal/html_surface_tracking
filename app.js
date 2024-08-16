@@ -165,29 +165,33 @@ class App{
 
         this.isMove = true;
 
+        this.scan_overlay = document.getElementById('scan_overlay');
+
         this.addButtonEvents();
     }
 
     addButtonEvents(){
         const self = this;
+        const info = document.getElementById('gesturesButton');
         
         function onClick(){
 
             if (self.isMove === true) {
                 self.isMove = false;
                 self.btn.style.display = 'block';
+                info.style.display = 'block';
             }
 
             else {
                 self.isMove = true;
                 self.btn.style.display = 'none';
+                info.style.display = 'none';
             }
             // console.log(self.isMove);
         }
 
         self.btn = document.getElementById('hitt');
         self.btn.addEventListener('click', onClick);
-          
     }
     
     setupXR(){
@@ -331,11 +335,18 @@ class App{
 
             this.reticle.visible = true;
             this.reticle.matrix.fromArray( pose.transform.matrix );
+            this.scan_overlay.style.display = 'none';
 
         }
         else {
 
             this.reticle.visible = false;
+            if (this.isMove === true) {
+                this.scan_overlay.style.display = 'block';
+            }
+            else {
+                this.scan_overlay.style.display = 'none';
+            }
         }
 
     }
