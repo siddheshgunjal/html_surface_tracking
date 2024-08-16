@@ -106,19 +106,16 @@ class ARButton{
         button.style.width = '100%';
         button.style.right = '0px';
         button.style.bottom = '0px';
-        button.style.border = '';
-        button.style.opacity = '1';
-        button.style.fontSize = '13px';
         button.onclick = function() {
             window.open("https://developer.mozilla.org/en-US/docs/Web/API/XRHitTestSource#browser_compatibility", "_blank")
         }
         button.textContent = 'Please open in CHROME or BRAVE on Android';
     }
 
-    stylizeElement( element, active = true, fontSize = 13, ignorePadding = false ) {
+    stylizeElement( element, active = true, fontSize = 15, ignorePadding = false ) {
         element.style.position = 'absolute';
         element.style.bottom = '20px';
-        if (!ignorePadding) element.style.padding = '12px 6px';
+        if (!ignorePadding) element.style.padding = '10px 6px';
         element.style.border = '1px solid #fff';
         element.style.borderRadius = '15px';
         element.style.background = (active) ? 'rgba(20,150,80,1)' : 'rgba(180,20,20,1)';

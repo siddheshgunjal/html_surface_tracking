@@ -117,6 +117,7 @@ body {
     width: 40px;
     height: 40px;
 }
+
 #gesturesButton i {
     display: block;
     font-size: 40px;
@@ -124,6 +125,59 @@ body {
     text-align: center;
     line-height: 40px;
 }
+
+#gesturesButton .tooltiptext {
+    font-size: 16px;
+    width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 130%;
+    left: 0%;
+    margin-left: -130px;
+    opacity: 0;
+    animation-name: disolve;
+    animation-duration: 15s;
+    animation-delay: 2s;
+    animation-timing-function: ease-in-out;
+}
+
+#gesturesButton .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+@keyframes disolve {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.2;
+    }
+    40% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 #gesturesPopup {
     display: none;
     position: fixed;
@@ -137,6 +191,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
+
 #closeGesturesPopup {
     position: absolute;
     top: -10px;
@@ -151,11 +206,13 @@ body {
     padding: 0 10px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
+
 .gesturesPopupInfo {
     display: grid;
     grid-template-columns: auto auto;
     width: 285px;
 }
+
 .gesturesPopupInfoRow {
     text-align: left;
     font-size: 18px;
@@ -175,6 +232,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 999;
 }
+
 .scan_overlay_content {
     position: relative;
     top: 40%;
@@ -182,6 +240,7 @@ body {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
 .scan_overlay_content p {
     color: white;
     font-size: 30px;

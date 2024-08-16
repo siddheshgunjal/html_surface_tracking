@@ -184,9 +184,7 @@ class App{
             else {
                 self.isMove = true;
                 self.btn.style.display = 'none';
-                info.style.display = 'none';
             }
-            // console.log(self.isMove);
         }
         self.btn = document.getElementById('hitt');
         self.btn.addEventListener('click', onClick);
