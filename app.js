@@ -181,7 +181,6 @@ class App{
                 self.btn.style.display = 'block';
                 info.style.display = 'block';
             }
-
             else {
                 self.isMove = true;
                 self.btn.style.display = 'none';
@@ -189,7 +188,6 @@ class App{
             }
             // console.log(self.isMove);
         }
-
         self.btn = document.getElementById('hitt');
         self.btn.addEventListener('click', onClick);
     }
@@ -300,35 +298,26 @@ class App{
         const session = this.renderer.xr.getSession();
 
         session.requestReferenceSpace( 'viewer' ).then( function ( referenceSpace ) {
-            
             session.requestHitTestSource( { space: referenceSpace } ).then( function ( source ) {
-
                 self.hitTestSource = source;
-
             } );
-
         } );
 
         session.addEventListener( 'end', function () {
-
             self.hitTestSourceRequested = false;
             self.hitTestSource = null;
             self.referenceSpace = null;
-
         } );
 
         this.hitTestSourceRequested = true;
-
     }
     
     getHitTestResults( frame ){
-
         const hitTestResults = frame.getHitTestResults( this.hitTestSource );
 
         // console.log(this.isMove);
 
         if ( hitTestResults.length && this.isMove === true ) {
-            
             const referenceSpace = this.renderer.xr.getReferenceSpace();
             const hit = hitTestResults[ 0 ];
             const pose = hit.getPose( referenceSpace );
@@ -336,7 +325,6 @@ class App{
             this.reticle.visible = true;
             this.reticle.matrix.fromArray( pose.transform.matrix );
             this.scan_overlay.style.display = 'none';
-
         }
         else {
 
@@ -348,7 +336,6 @@ class App{
                 this.scan_overlay.style.display = 'none';
             }
         }
-
     }
 
     render( timestamp, frame ) {
