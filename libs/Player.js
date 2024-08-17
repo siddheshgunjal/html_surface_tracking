@@ -159,11 +159,7 @@ class Player{
         
 		if (clip!==undefined){
 			const action = this.mixer.clipAction( clip );
-			if (name == '03_sphere_bot_open'){
-                action.loop = THREE.LoopOnce;
-                action.clampWhenFinished = true;
-            }
-            else if (name == '06_sphere_bot_run_attack') {
+            if (name == '06_sphere_bot_run_attack') {
             	action.time = 0;
             	action.paused = true;
             }
