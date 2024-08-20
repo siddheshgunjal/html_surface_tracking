@@ -102,12 +102,14 @@ class Player{
 
 	newPath(pt){
         const player = this.object;
+
+        const walk_anim = '02_sphere_bot_run_cycle'
         
         if (this.pathfinder===undefined){
             this.calculatedPath = [ pt.clone() ];
             //Calculate target direction
             this.setTargetDirection();
-            this.action = '02_sphere_bot_run_cycle';
+            this.action = walk_anim;
             return;
         }
         
@@ -122,7 +124,7 @@ class Player{
 		const self = this;
 		
 		if (this.calculatedPath && this.calculatedPath.length) {
-			this.action = '02_sphere_bot_run_cycle';
+			this.action = walk_anim;
 			
 			const pt = this.calculatedPath[0].clone();
 			this.setTargetDirection()
@@ -150,6 +152,7 @@ class Player{
 	}
 	
 	set action(name){
+		const default_anim = '06_sphere_bot_run_attack'
 		//Make a copy of the clip if this is a remote player
 		if (this.actionName == name.toLowerCase()) return;
 		
@@ -159,7 +162,7 @@ class Player{
         
 		if (clip!==undefined){
 			const action = this.mixer.clipAction( clip );
-            if (name == '06_sphere_bot_run_attack') {
+            if (name == default_anim) {
             	action.time = 0;
             	action.paused = true;
             }
@@ -179,6 +182,7 @@ class Player{
 	update(dt){
 		const speed = this.speed;
 		const player = this.object;
+		const default_anim = '06_sphere_bot_run_attack'
 		
 		if (this.mixer) this.mixer.update(dt);
 		
@@ -209,7 +213,7 @@ class Player{
                         this.newPath(this.app.randomWaypoint);
                     }else{
                         player.position.copy( targetPosition );
-                        this.action = '06_sphere_bot_run_attack';
+                        this.action = default_anim;
                     }
                 }else{
                     const pt = this.calculatedPath[0].clone();

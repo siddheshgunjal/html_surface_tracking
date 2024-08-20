@@ -203,6 +203,12 @@ class App{
         this.hitTestSource = null;
 
         let isIdle, isJump, isAttack;
+
+        const default_anim = '06_sphere_bot_run_attack';
+        const doubletap_anim = '03_sphere_bot_open';
+        const tripletap_anim = '04_sphere_bot_attack';
+        const swipeup_anim = '07_sphere_bot_jump';
+        const swipedown_anim = '06_sphere_bot_run_attack';
         
         function onSelect() {
             if (self.knight===undefined) return;
@@ -217,7 +223,7 @@ class App{
                     self.shadowMesh.position.setFromMatrixPosition( self.reticle.matrix );
                     self.knight.object.visible = true;
                     self.shadowMesh.visible = true;
-                    self.knight.action = '06_sphere_bot_run_attack';
+                    self.knight.action = default_anim;
                     document.getElementById('hitt').click();
                     isIdle = true;
                     isJump = false;
@@ -228,7 +234,7 @@ class App{
 
         this.gestures.addEventListener( 'doubletap', (ev)=>{
             if (isIdle == true) {
-                self.knight.action = '03_sphere_bot_open';
+                self.knight.action = doubletap_anim;
                 isIdle = false;
                 isJump = false;
                 isAttack = false;
@@ -238,7 +244,7 @@ class App{
 
         this.gestures.addEventListener( 'tripletap', (ev)=>{
             if(isAttack == false){
-                self.knight.action = '04_sphere_bot_attack';
+                self.knight.action = tripletap_anim;
                 isJump = false;
                 isIdle = false;
                 isAttack = true;
@@ -248,14 +254,14 @@ class App{
 
         this.gestures.addEventListener( 'swipe', (ev)=>{
             if (ev.direction == 'UP' && isJump == false) {
-                self.knight.action = '07_sphere_bot_jump';
+                self.knight.action = swipedown_anim;
                 isJump = true;
                 isIdle = false;
                 isAttack = false;
                 this.btn.disabled = true;
             }
             if (ev.direction == 'DOWN' && isIdle == false) {
-                self.knight.action = '06_sphere_bot_run_attack';
+                self.knight.action = swipedown_anim;
                 isIdle = true;
                 isJump = false;
                 isAttack = false;
