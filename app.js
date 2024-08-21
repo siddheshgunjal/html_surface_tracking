@@ -254,7 +254,7 @@ class App{
 
         this.gestures.addEventListener( 'swipe', (ev)=>{
             if (ev.direction == 'UP' && isJump == false) {
-                self.knight.action = swipedown_anim;
+                self.knight.action = swipeup_anim;
                 isJump = true;
                 isIdle = false;
                 isAttack = false;
