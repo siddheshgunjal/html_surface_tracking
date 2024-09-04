@@ -4,8 +4,6 @@ This is a demo implementation of [WebXR Device API](https://github.com/immersive
 
 ## [Click to watch demo](./assets/WebAR_Spatial.mp4)
 
-https://raw.githubusercontent.com/siddheshgunjal/html_surface_tracking/main/assets/WebAR_Spatial.mp4
-
 ## [Click to try it yourself](https://siddheshgunjal.github.io/html_surface_tracking/)
 
 # Table of contents
