@@ -2,7 +2,7 @@
 
 This is a demo implementation of [WebXR Device API](https://github.com/immersive-web/webxr/tree/master). Purpose of this project is to showcase how we can develop XR application for web browsers using WebXR. This project showcases implementation of Hit-test to find out vertical and horizontal plains and initiate 3D geometry.
 
-## [Click to watch demo](./assets/WebAR_Spatial.mp4)
+## [Click to watch demo](https://drive.google.com/file/d/1a6Q-1WXKdxbvVj5A-HBkkl46V4a5R0bg/preview)
 
 ## [Click to try it yourself](https://siddheshgunjal.github.io/html_surface_tracking/)
 
